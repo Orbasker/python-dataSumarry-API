@@ -25,7 +25,7 @@ class DataSummary:
             
 
         
-    def sun(self, feature):
+    def sum(self, feature):
         data = self.data['data']
         meta_data = self.meta_data
         if feature not in meta_data.fieldnames:
