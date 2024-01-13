@@ -25,19 +25,10 @@ class DataSummary:
             
 
         
-    def sum(self, feature):
-        data = self.data['data']
-        meta_data = self.meta_data
-        if feature not in meta_data.fieldnames:
-            raise ValueError("feature not found in metafile")
-        total = 0
-        for row in data:
-            if feature in row.keys():
-                if row[feature] != None:
-                    total += float(row[feature])
-        return total
+    def _sum(self, feature):
+        return self._sum(feature)/self._count(feature)
     
-    def count(self, feature):
+    def _count(self, feature):
         data = self.data['data']
         meta_data = self.meta_data
         if feature not in meta_data.fieldnames:
@@ -112,7 +103,6 @@ class DataSummary:
     
     def to_csv(self, filename, delimiter=','):
         data = self.data['data']
-        meta_data = self.meta_data
         if delimiter not in [',', '.', ':', '|', '-', ';', '#', '*']:
             raise ValueError("unsupported delimiter")
         new_file = open(filename, 'w')
@@ -151,5 +141,15 @@ class DataSummary:
         return max_val
         
         
-
+    def empty(self, feature):
+        data = self.data['data']
+        meta_data = self.meta_data
+        if feature not in meta_data.fieldnames:
+            raise ValueError("feature not found in metafile")
+        count = 0
+        for row in data:
+            if feature in row.keys():
+                if row[feature] == None:
+                    count += 1
+        return count
         

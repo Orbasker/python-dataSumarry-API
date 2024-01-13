@@ -11,7 +11,6 @@ if __name__ == "__main__":
     DS = DataSummary(datafile="Ex1.json", metafile="Happiness Metadata.csv")
     print(DS[3])  # Test __getitem__ by index
     print(DS["Country"])  # Test __getitem__ by key
-
     try:
         DS['GDP']  # This should raise an exception
     except Exception as err:
@@ -38,7 +37,6 @@ if __name__ == "__main__":
         print("unexpected function min for categorical feature")
 
     print(DS.max("Happiness Score"))  # Test max method
-    print(DS.count("Country"))  # Test count method
 
     test_filename = "test_output.csv"
     DS.to_csv(test_filename)  # Test to_csv method
