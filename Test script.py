@@ -1,3 +1,5 @@
+# Author: Or Basker 
+# ID: 316388743
 from data_summary import DataSummary 
 
 if __name__ == "__main__":
@@ -37,7 +39,7 @@ if __name__ == "__main__":
         print("unexpected function min for categorical feature")
 
     print(DS.max("Happiness Score"))  # Test max method
-
+    print(DS.empty("Happiness Score"))  # Test empty method
     test_filename = "test_output.csv"
     DS.to_csv(test_filename)  # Test to_csv method
     print(f"CSV exported to {test_filename}")
