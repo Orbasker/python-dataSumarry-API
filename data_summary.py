@@ -1,7 +1,7 @@
 # Author: Or Basker
 # ID: 316388743
-import json
 import csv
+import json
 import os
 
 
@@ -28,13 +28,13 @@ class DataSummary:
         self._fix_records()
 
     def __getitem__(self, key):
-        '''
+        """
         Overload the [] operator
         :param key: index or key
         :return: the value of the key
         for int: return the fieldnames of the metafile
         for str: return the value of the key
-        '''
+        """
         if isinstance(key, int):
             return self.data[key]
         elif isinstance(key, str):
@@ -42,7 +42,7 @@ class DataSummary:
             if key not in meta_data.fieldnames:
                 raise ValueError("key not found")
             return self._get_feature(key)
-            
+
     def _get_feature(self, feature):
         """
         Helper function for mean, mode, unique, min, max, empty, []
@@ -102,16 +102,16 @@ class DataSummary:
         Helper function for get_meta_data_from_csv
         :return: the meta data from the csv file
         """
-        self.meta_data = csv.DictReader(open(self.metafile, 'r'))
+        self.meta_data = csv.DictReader(open(self.metafile, "r"))
 
     def _get_data_from_json(self):
         """
         Helper function for get_data_from_json
         :return: the data from the json file
         """
-        with open(self.datafile, 'r') as f:
+        with open(self.datafile, "r") as f:
             data = json.load(f)
-        self.data = data['data']
+        self.data = data["data"]
 
     def mean(self, feature):
         """
@@ -158,21 +158,21 @@ class DataSummary:
                         unique_list.append(row[feature])
         return sorted(unique_list)
 
-    def to_csv(self, filename, delimiter=','):
+    def to_csv(self, filename, delimiter=","):
         """
         :param filename: the name of the csv file to be written
         :param delimiter: the delimiter to be used
         :return: None
         Legal delimiters are: ',', '.', ':', '|', '-', ';', '#', '*'
         """
-        if delimiter not in [',', '.', ':', '|', '-', ';', '#', '*']:
+        if delimiter not in [",", ".", ":", "|", "-", ";", "#", "*"]:
             raise ValueError("unsupported delimiter")
-        new_file = open(filename, 'w')
+        new_file = open(filename, "w")
         for row in self.data:
             for key, val in row.items():
                 if val is None:
-                    row[key] = ''
-            new_file.write(delimiter.join(row.values()) + '\n')
+                    row[key] = ""
+            new_file.write(delimiter.join(row.values()) + "\n")
         new_file.close()
 
     def min(self, feature):
@@ -182,12 +182,10 @@ class DataSummary:
         """
         if feature not in self.meta_data.fieldnames:
             raise ValueError("feature not found in metafile")
-        min_val = float('inf')
+        min_val = float("inf")
         for row in self.data:
-            if feature in row.keys():
-                if row[feature] is not None:
-                    if float(row[feature]) < min_val:
-                        min_val = float(row[feature])
+            if feature in row.keys() and row[feature] is not None and float(row[feature]) < min_val:
+                min_val = float(row[feature])
         return min_val
 
     def max(self, feature):
@@ -197,7 +195,7 @@ class DataSummary:
         """
         if feature not in self.meta_data.fieldnames:
             raise ValueError("feature not found in metafile")
-        max_val = float('-inf')
+        max_val = float("-inf")
         for row in self.data:
             if feature in row.keys():
                 if row[feature] is not None:

@@ -1,6 +1,6 @@
-# Author: Or Basker 
+# Author: Or Basker
 # ID: 316388743
-from data_summary import DataSummary 
+from data_summary import DataSummary
 
 if __name__ == "__main__":
     try:
@@ -14,14 +14,14 @@ if __name__ == "__main__":
     print(DS[3])  # Test __getitem__ by index
     print(DS["Country"])  # Test __getitem__ by key
     try:
-        DS['GDP']  # This should raise an exception
+        DS["GDP"]  # This should raise an exception
     except Exception as err:
         print("Exception: ", err)
     else:
         print("unexpected feature GDP")
 
     try:
-        DS['data']  # This should raise an exception
+        DS["data"]  # This should raise an exception
     except Exception as err:
         print("Exception: ", err)
     else:
@@ -44,6 +44,6 @@ if __name__ == "__main__":
     DS.to_csv(test_filename)  # Test to_csv method
     print(f"CSV exported to {test_filename}")
 
-    # Clean up: remove the test file
     import os
+
     os.remove(test_filename)
